@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "request": "^2.88.2",
     "uniqid": "^5.2.0"
   },
   "bin": {
-    "organizer": "day4//activity//organizer.js"
+    "myDirectory": "C:\\Users\\hp\\Desktop\\dev\\day4(activity1)\\activity\\organizer.js"
   },
   "devDependencies": {},
   "scripts": {
@@ -19,7 +20,7 @@
     "url": "git+https://github.com/PranjalG15/myfile1.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "pranjal",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/PranjalG15/myfile1/issues"
