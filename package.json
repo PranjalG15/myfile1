@@ -1,0 +1,30 @@
+{
+  "name": "dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "nodemailer": "^6.4.8",
+    "request": "^2.88.2",
+    "uniqid": "^5.2.0"
+  },
+  "bin": {
+    "dirManager": "day4\\activity\\organizer.js"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PranjalG15/myfile1.git"
+  },
+  "keywords": [],
+  "author": "PRANJAL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PranjalG15/myfile1/issues"
+  },
+  "homepage": "https://github.com/PranjalG15/myfile1#readme"
+}
