@@ -21,7 +21,7 @@ function sendFile(dest,category,src)
     }
     let fName=path.basename(src);
     let cPath=path.join(categoryPath,fName);
-    fs.copyFileSync(src,cPath);
+    fsy.copFileSync(src,cPath);
 }
 function getCategory(ext) {
     let types=utility.types;
@@ -43,7 +43,7 @@ function organizer(src,dest) {
        if (category==null) {
            category="others";
        }
-       console.log(category);
+      // console.log(category);
        sendFile(dest,category,src);
     }
     else {
@@ -60,14 +60,14 @@ function organizer(src,dest) {
         }
     }
 }
+
+
 let src=process.argv[2];
 let dest=path.join(src,"organized_files")
 if (fs.existsSync(dest) == false) {
     fs.mkdirSync(dest);
 }
 organizer(src,dest);
-//let root={};
-//console.log(src);
-//view(src,path.basename(src));
 
-// console.log(root);
+
+//node "C:\Users\hp\Desktop\dev\day4\activity\organizer.js" "C:\Users\hp\Desktop\my files"
