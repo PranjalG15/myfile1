@@ -1,0 +1,1068 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Kurukshetra University :: Kurukshetra</title>
+<script language="javascript" src="articleAjax.js"></script>
+
+
+<script language="javascript">
+var ImgArr=Array();
+var ImgRef=Array();
+var ArticleTitles=Array();
+var ImgArr1=new Array();
+var cnt=1;
+var interval;
+var pause=false;
+function crossFade()
+{
+	if(document.all) {
+		document.getElementById("article_img").style.filter = "alpha(opacity=100)";
+	} else {
+		document.getElementById("article_img").style.MozOpacity = (99/100);
+	}
+		xInterval = setTimeout("pause=false",2000);
+}
+
+
+function onBodyLoad()
+{
+    var k=1;
+	var strD1="<a href='" + ImgRef[k] + "'><img  width='220' height='150'  src='" + ImgArr1[k].src + "' border='0' alt='" + ArticleTitles[k] + "'></a>";
+	var strLinks="";
+	document.getElementById("article_img").innerHTML=strD1;
+	for(var j=1;j<ImgArr.length;j++)
+		{
+		    if(k==j)
+			{
+				strLinks=strLinks + "<a href='javascript:openImg(" + j + ")'><font face='verdana,arial' font color='#ffffff'><strong>" + j + "</strong></font></a>";
+			}
+			else
+			{
+				strLinks=strLinks + "<a href='javascript:openImg(" + j + ")'>" + j + "</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			}
+		}
+	/*document.getElementById("numberedLinks").innerHTML=strLinks + "&nbsp;<a href='javascript:openImg("+ (k+1) + ")'><img src='images4fla/gogreat.gif' border='0' align='absmiddle'/></a>&nbsp;";*/
+}
+
+function startFlash()
+{
+	interval=setInterval("showOneByOne()",5000);
+
+}
+
+function openImg(current_id)
+{
+    //clearInterval(interval);
+	var k=1;
+	var strD1="<a href='" + ImgRef[current_id] + "'><img width='220' height='150' src='" + ImgArr1[current_id].src + "' border='0' alt='" + ArticleTitles[current_id] + "'></a>";
+	var strLinks="";
+	var prevLinks="";
+	var nextLinks="";
+	document.getElementById("article_img").innerHTML=strD1;
+	for(var j=1;j<ImgArr.length;j++)
+		{
+			if(current_id==j)
+			{
+				strLinks=strLinks + "<a href='javascript:openImg(" + j + ")' style='text-decoration:none; '><font face='verdana,arial' font color='#ffffff'><strong>" + j + "</strong></font></a>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:white;'>|</span>&nbsp;&nbsp;&nbsp;&nbsp;";
+			}
+			else
+			{
+				strLinks=strLinks + "<a href='javascript:openImg(" + j + ")'style='text-decoration:none;  color:#FEDD23;'>" + j + "</a>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:white;'>|</span>&nbsp;&nbsp;&nbsp;&nbsp;";
+			}
+
+		}
+
+
+	if((current_id-1)<=0) { }
+	else
+	{
+		/*prevLinks="&nbsp;<a href='javascript:openImg("+ (current_id-1) + ")'><img src='images4fla/goless.gif' border='0' align='absmiddle'/></a>&nbsp;"; */
+	}
+	if((current_id+1)>(ImgArr.length)) { }
+	else
+	{
+		/*nextLinks="&nbsp;<a href='javascript:openImg("+ (current_id+1) + ")'><img src='images4fla/gogreat.gif' border='0' align='absmiddle'/></a>&nbsp;";*/
+	}
+	document.getElementById("numberedLinks").innerHTML=prevLinks + strLinks + nextLinks ;
+
+
+}
+
+
+function openImgFade(current_id)
+{
+    var k=1;
+	var strD1="<a href='" + ImgRef[current_id] + "'><img width='220' height='150'  src='" + ImgArr1[current_id].src + "' border='0' alt='" + ArticleTitles[current_id] + "'></a>";
+	var strLinks="";
+	var prevLinks="";
+	var nextLinks="";
+	document.getElementById("article_img").style.MozOpacity="alpha(opacity=.99)";
+	document.getElementById("article_img").innerHTML=strD1;
+	for(var j=1;j<ImgArr.length;j++)
+		{
+			if(current_id==j)
+			{
+				strLinks=strLinks + "<a href='javascript:openImg(" + j + ")'><font face='verdana,arial' font color='#ffffff'><strong>" + j + "</strong></font></a>";
+			}
+			else
+			{
+				strLinks=strLinks + "<a href='javascript:openImg(" + j + ")'>" + j + "</a>";
+			}
+		}
+	if((current_id-1)<=0) { }
+	else
+	{
+		prevLinks="&nbsp;<a href='javascript:openImg("+ (current_id-1) + ")'><img src='admin/images4fla/goless.gif' border='0' align='absmiddle'/></a>&nbsp;";
+	}
+	if((current_id+1)>(ImgArr.length)) { }
+	else
+	{
+		nextLinks="&nbsp;<a href='javascript:openImg("+ (current_id+1) + ")'><img src='admin/images4fla/gogreat.gif' border='0' align='absmiddle'/></a>&nbsp;";
+	}
+	document.getElementById("numberedLinks").innerHTML=prevLinks + strLinks + nextLinks ;
+}
+
+
+ImgArr[1]='images4fla/16-image-1.0.png';
+ImgRef[1]='http://localhost/kuru/viewgallery.php';
+ArticleTitles[1]=' ';
+ImgArr[2]='images4fla/17-IMG5.0.jpg';
+ImgRef[2]='http://localhost/kuru/viewgallery.php';
+ArticleTitles[2]=' ';
+ImgArr[3]='images4fla/18-img2.0.jpg';
+ImgRef[3]='http://localhost/kuru/viewgallery.php';
+ArticleTitles[3]=' ';
+ImgArr[4]='images4fla/19-img4.0.jpg';
+ImgRef[4]='http://localhost/kuru/viewgallery.php';
+ArticleTitles[4]=' ';
+ImgArr[5]='images4fla/20-img.jpg';
+ImgRef[5]='http://localhost/kuru/viewgallery.php';
+ArticleTitles[5]=' ';
+
+
+function LoadImg()
+{
+
+	for(var i=1;i<ImgArr.length;i++)
+	{
+		ImgArr1[i]=new Image();
+		ImgArr1[i].src=ImgArr[i];
+		//document.write("<br><img src='" + ImgArr1[i].src + "'>");
+	}
+
+}
+LoadImg();
+
+function callSearch()
+{
+var s_url="http://villagemama.pgpartner.com/search.php?form_keyword=";
+//window.location.href=s_url+document.getElementById("txtSearchBoxText").value;
+window.open(s_url+document.getElementById("txtSearchBoxText").value, '_blank');
+}
+
+function showOneByOne()
+{
+	if(cnt>5)
+	{
+		//clearInterval(interval);
+		cnt=1;
+		openImg(1);
+	}
+
+	if(cnt<=5)
+	{
+
+		openImg(cnt);
+		cnt++;
+	}
+
+}
+
+</script><script language="javascript">
+ function stopScroll()
+ {	
+ if (document.all)
+      	{		
+		document.all.recent_topics.stop();	
+		}	
+		else if (document.getElementById)
+      		{		
+			document.getElementById('recent_topics').stop();	
+ }
+ }
+ function startScroll()
+      		{	
+			if (document.all)	
+			{		
+			document.all.recent_topics.start();	
+			}	
+			else if (document.getElementById)	
+			{		
+				document.getElementById('recent_topics').start();	
+			}
+			}
+
+</script>
+<script language="javascript">
+<!--
+function MM_reloadPage(init) {  //reloads the window if Nav4 resized
+  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
+    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
+  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
+}
+MM_reloadPage(true);
+//-->
+</script>
+<link href="hp.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+#vcBlog {
+	float: left;
+	height: 387px;
+	width: 226px;
+	margin-top: 20px;
+}
+#vcTxt {
+}
+#vcBlogtxt {
+}
+-->
+</style>
+</head>
+
+<body>
+<div id="mainDiv">
+	<!--This is Header file -->
+	<div style="width:100%;">
+
+<div class="hdrMain">
+
+	<div class="logo_kuk"></div>
+
+	<div class="logoName">
+
+	<!-- top RHS links  -->
+
+<!--	<div class="topNav" align="right" style="padding-left:344px;"> -->
+	<div class="topNav" align="right">
+		<div class="topNavLinks" style="width:50px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    	<div class="topNavLinks"><a href="https://facebook.com/KUKHaryana/" target="_blank"><img src="images/facebook.png"></a></div>
+		<div class="topNavLinks">&nbsp;&nbsp;&nbsp;</div>
+		<div class="topNavLinks"><a href="https://twitter.com/vc_kuk" target="_blank"><img src="images/twitter.png"></a></div>
+		<div class="topNavLinks">&nbsp;&nbsp;&nbsp;</div>
+		<div class="topNavLinks"><a href="index.php" class="navBtnsTop">Home</a></div>
+     	        <div class="topNavLinks">&nbsp;|&nbsp;</div>
+		<div class="topNavLinks"><a href="contact_us.php" class="navBtnsTop">Contact Us</a></div>
+	</div>
+
+	<!-- top RHS links  ENDS here-->
+
+	</div>
+
+    
+
+	<div style="float:right; margin-top:33px; margin-right:12px; background-image:url(images/searchBG1.gif); background-repeat:no-repeat; height:74px; width:267px;">
+
+
+
+	<table style="padding-left:5px; " cellpadding="0" cellspacing="0" >
+
+  		<tr>
+
+			<td>
+
+			  <!-- call include for search-->
+
+				<div style="height:auto;">	
+
+					<script  type="text/javascript">
+	function onsubmit1(frm)
+	{
+/*		 if(frm.sitesearch[0].checked)
+		 {
+		 		frm.action="search_directory.php";
+		 		// this is for village mama search
+		 		//frm.cx.value="009642450920537092256:8gc3awqxbfs";
+		 		//frm.target="_self";
+		 }*/
+		 if(frm.sitesearch[1].checked)
+		 {
+		 		
+				frm.action="search_kukinfo.php";// this is for village mama search
+				//frm.action="search_kukinfo.php";// this is for village mama search
+		 		//frm.cx.value="009642450920537092256:8gc3awqxbfs";
+		 		//frm.target="_self";
+		 }
+		  if(frm.sitesearch[2].checked)
+		 {
+		 		frm.action="search_web.php";
+				// this is for village mama search
+		 		//frm.cx.value="009642450920537092256:8gc3awqxbfs";
+		 		//frm.target="_self";
+		 }
+		return true;
+	}
+</script>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <form method="post" name="frm" action="search_web.php" target="_blank" onsubmit="return onsubmit1(this)" id="cse-search-box">
+		<input type="hidden" name="cx" value="015427843127510172459:xbkyfyx4mdm" />
+		<input type="hidden" name="cof" VALUE="FORID:11;" />
+		<tr>
+			<td style="padding-top:10px">
+			<table width="260px" border="0" align="center" cellpadding="0" cellspacing="0">
+               <tr>
+			<td width="10%" class="searchtxt" style="font-weight:bold; color:#2F4870;">SEARCH:</td>                                         
+		        <td width="50%" class="searchtxt" style="text-align:right;">
+                            <a href="site_index.php" style="text-align:right;text-decoration:none">Site Index</a></td>
+<!--                    <td><input name="sitesearch" type="radio" value="search_kukinfo.php" />
+			    <input type="hidden" name="hl" value="en" />
+			</td> 
+			<td width="20%" class="searchtxt">kuk.ac.in</td> -->
+                    <td style="float:right;"><input name="sitesearch" type="radio" value="" /></td>
+                    <td width="20%" class="searchtxt">Web</td>
+                  </tr>
+                </table>
+			</td>
+         </tr>
+              <tr>
+                <td style="padding:3px">
+				<table width="180px" border="0" align="center" cellpadding="2" cellspacing="2">
+                  <tr>
+				    <td  align="left" valign="top" class="searchtxt">
+		<input name="q" type="text" size="28" class="searchtxt" value="Search powered by Google..." 
+			  onblur="if(this.value=='') this.value='Search powered by Google...';" onfocus="if(this.value=='Search powered by Google...') this.value='';" />
+			  		</td>
+                    <td valign="top">
+					<input  type="image" value="Go" src="images/gobtn.gif" alt="Search" /></td>
+                  </tr>
+                </table>
+				</td>
+              </tr>
+		</form>
+</table>
+				</div>
+
+				<!-- call include for search-->
+
+			</td>
+
+		</tr>
+
+	</table>
+
+	</div>
+
+</div>
+
+<div style="clear:both; height:0px;"></div>
+
+<!--- Navigation Buttons --->
+
+<div id="mainwrapper">	
+
+	<div id="headerBg">
+
+		<div id="navBg">
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=MQ==&L01_direction=" class="navBtns" title="About Us">
+            About Us            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=Mw==&L01_direction=H" class="navBtns" title="Administration">
+            Administration            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=OA==&L01_direction=H" class="navBtns" title="Faculties/Departments">
+            Faculties            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=MTM=&L01_direction=V" class="navBtns" title="About the ACT and PIOs & First Appellate">
+            RTI            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=NjE=&L01_direction=H" class="navBtns" title="Library">
+            Library            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=MTE=&L01_direction=H" class="navBtns" title="Facilities provided by the university">
+            Facilities            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=MTQ=&L01_direction=V" class="navBtns" title="Syllabus">
+            Syllabi            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=MTU=&L01_direction=V" class="navBtns" title="Ordinance">
+            Ordinances            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=NjU=&L01_direction=V" class="navBtns" title="Online Payment">
+            Online Payment            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=Njk=&L01_direction=V" class="navBtns" title="Hostel Payment">
+            Hostel Payment            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=NjQ=&L01_direction=V" class="navBtns" title="Admissions">
+            Admissions            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=Njc=&L01_direction=V" class="navBtns" title="Exam Reval Forms">
+            Online Exam/Re-Evaluation            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=MTk=&L01_direction=" class="navBtns" title="Important Links">
+            Important Links            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=Njg=&L01_direction=V" class="navBtns" title="In Students">
+            International Students            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                    <div class="navBtns">
+            <a href="information.php?m=dg==&L01_id=NzA=&L01_direction=V" class="navBtns" title="Journal">
+            KU Law Journal            </a>
+            <div class="navBtnsDvdr"></div>
+            </div>
+                </div>
+
+	</div>
+
+</div>
+
+<div style="clear:both; height:0px;"></div>
+
+</div>
+	  <div id="contentbody">
+		   
+		
+	  <div style="width:23%; margin-left:10px; margin-top:15px; float:left; border: solid 0px #999999;">
+<div><img src="images/linksICO.gif" alt="quick links"></div>
+<div id="leftlink" style="float:left; margin-right:12px; width:100%;">
+                     <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MTA5" class="lhsTxtLink"  title="Useful Links Online Education Support">
+		 Useful Links For Online Education Support</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MTA2" class="lhsTxtLink"  title="Video Recording of 32nd Convocation">
+		 Video Recording of 32nd Convocation</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MTA3" class="lhsTxtLink"  title="Haryana Public Universities Act 2017">
+		 Haryana Public Universities Act 2017( Draft)</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=OTU=" class="lhsTxtLink"  title="Digital Initiatives">
+		 Digital Initiatives</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=NDU=" class="lhsTxtLink"  title="Prospectus">
+		 Prospectus/Admission Notices/Fee Notices</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=OTA=" class="lhsTxtLink"  title="result">
+		 Entrance Test Results/Counselling/Merit Lists</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=NTI=" class="lhsTxtLink"  title="Notices">
+		 Misc./Students/Colleges Notices</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=OTc=" class="lhsTxtLink"  title="Date Sheets (Theory)">
+		 Date Sheets (Theory)</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=NzU=" class="lhsTxtLink"  title="Date Sheets - Practicals">
+		 Date Sheets - Practicals</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=NzE=" class="lhsTxtLink"  title="Exam Notices">
+		 Exam Notices & Centre/Seating Plan</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=NjI=" class="lhsTxtLink"  title="Merit Lists">
+		 Merit List / Pass Percentages / Degree Issued</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=Mg==" class="lhsTxtLink"  title="Exam Forms">
+		 Exam/Appls.Forms/Re-evaluation Rules</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=Njg=" class="lhsTxtLink"  title="kuk.ac.in/duplicaterollno.php">
+		 Duplicate Roll Number Printing</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=NDg=" class="lhsTxtLink"  title="Detailed Marks">
+		 Results</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MTAz" class="lhsTxtLink"  title="�nline Examination Form">
+		 �nline Examination Form (Regular Students)</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MTA0" class="lhsTxtLink"  title="�nline Examination Form">
+		 �nline Examination Form (Private Students)</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MTA1" class="lhsTxtLink"  title="Online Re-Evaluation Form">
+		 Online Re-Evaluation Form</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=ODA=" class="lhsTxtLink"  title="Re-evaluation Results">
+		 Re-evaluation Results</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=OTQ=" class="lhsTxtLink"  title="Sports">
+		 Directorate of Sports</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=NTE=" class="lhsTxtLink"  title="Anti Ragging Cell">
+		 Anti Ragging Cell</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=NjY=" class="lhsTxtLink"  title="Digital University">
+		 Digital University</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MTI=" class="lhsTxtLink"  title="Academic Calender 2011-12">
+		 Academic Calender</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MTU=" class="lhsTxtLink"  title="Jobs -  Kurukshetra University">
+		 Jobs/Career</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MjA=" class="lhsTxtLink"  title="">
+		 KU - Webmail Login</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MTE=" class="lhsTxtLink"  title="KUK Distance Education Information">
+		 Distance Education</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=Mzk=" class="lhsTxtLink"  title="Colleges and Schools">
+		 Colleges and Schools</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=OA==" class="lhsTxtLink"  title="Tenders">
+		 Tender Notices/Auction Notices</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=Njc=" class="lhsTxtLink"  title="Budget Estimates">
+		 Budget Estimates</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=NTM=" class="lhsTxtLink"  title="Annual Report">
+		 Annual Report</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=MzU=" class="lhsTxtLink"  title="Mandatory Disclosures">
+		 Mandatory Disclosures</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=NTA=" class="lhsTxtLink"  title="Academic council">
+		 Academic Council Agenda</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=Nzc=" class="lhsTxtLink"  title="NIRF">
+		 NIRF</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=OTY=" class="lhsTxtLink"  title="Rooms Booking - University Guest House">
+		 Rooms Booking - University Guest House</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=Nzg=" class="lhsTxtLink"  title="IQAC">
+		 IQAC</a>
+
+</div>
+         <div class="lefttxtlink">
+	
+
+
+
+<a href="hpcontent.php?action=hpcontent&id=ODE=" class="lhsTxtLink"  title="Verification">
+		 Fee Payment Verification</a>
+
+</div>
+			<div class="lefttxtlink"><a href="viewgallery.php" class="lhsTxtLink"  title="">Image Gallery</a></div>
+		</div>
+		
+		</div>
+		
+	
+		
+	   <div id="centerdiv">
+          <div style=" float: left;	width: 100%; border:#FF0000 0px solid; font-size:12px;" >
+		
+		 <p style="text-align: center">
+	<strong style="font-size: 16px"><u>Colleges/Instt./Dir. Notices</u></strong></p>
+<table border="1" cellpadding="\" cellspacing="\" style="width: 560px">
+	<tdiv>
+		<tr>
+			<td width="80">
+				13-04-2020</td>
+			<td>
+				<a href="/userfiles/file/Year2020/LeftLinks/MiscNotices/Letter%20(1).JPG" target="_blank"><span style="font-family: Arial, Helvetica, sans-serif; font-size: small;">Regarding link of aadhar with Bank account</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				12-03-2020</td>
+			<td>
+				<div class="ii gt" id=":mz" style="font-size: 0.875rem; direction: ltr; margin: 8px 0px 0px; padding: 0px; position: relative; font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
+					<div class="a3s aXjCH " id=":n0" style="overflow: hidden; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: small; line-height: 1.5; font-family: Arial, Helvetica, sans-serif;">
+						<div dir="auto">
+							<div dir="auto">
+								<a href="/userfiles/file/Year2020/LeftLinks/MiscNotices/New%20Doc%202020-03-13%2010_28_11_1%20(2).pdf" target="_blank">Notice - All type of complaint s regarding colleges</a></div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="80">
+				11-03-2020</td>
+			<td>
+				<a href="/userfiles/file/Year2020/LeftLinks/MiscNotices/New%20Doc%202020-03-11%2010_23_37_1.pdf" target="_blank"><span -webkit-text-stroke-width:="" background-color:="" display:="" float:="" font-size:="" font-style:="" font-variant-caps:="" font-variant-ligatures:="" font-weight:="" helvetica="" inline="" letter-spacing:="" orphans:="" segoe="" style="color: rgb(32, 31, 30); font-family: " text-align:="" text-decoration-color:="" text-decoration-style:="" text-indent:="" text-transform:="" ui="" web="" west="" white-space:="" widows:="" word-spacing:="">Members of STEM forum</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				04-02-2020</td>
+			<td>
+				<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Revised%20Rulses%20of%20Reservation%20of%20University%20Guest%20House.PDF" target="_blank"><span style="font-family: Arial, Helvetica, sans-serif; font-size: small;">Revised Rules for the Reservation of University Guest Houses</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				23-01-2020</td>
+			<td>
+				<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/New%20Rules%20for%20University%20Guest%20House%20%26%20K_V_%20Niwas%20Shimla.PDF" target="_blank"><span style="font-family: Arial, Helvetica, sans-serif; font-size: small;">New Rules for Reservation of University Guest House &amp; K.V. Niwas, Shimla</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				27-06-2019</td>
+			<td>
+				<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Instruction%20%26%20Guideline-converted-compressed.pdf" target="_blank"><b new="" style="font-family: " times="">I</b><span new="" style="font-family: " times="">nstructions/Guidelines for Admission to various Courses for the Session 2019-20&nbsp;</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				12-02-2019</td>
+			<td>
+				<div helvetica="" segoe="" style="margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; font-size: 15px; line-height: inherit; font-family: " ui="" web="" west="">
+					<a href="/userfiles/file/Year2018/LeftLinks/MiscNotices/Reminder%20letter.jpg" target="_blank"><span google="" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant-ligatures: no-contextual; font-variant-caps: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: ">Supply of Blank Answer Books and other exams materials</span></a></div>
+				<div helvetica="" segoe="" style="margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; font-size: 15px; line-height: inherit; font-family: " ui="" web="" west="">
+					&nbsp;</div>
+				<div helvetica="" segoe="" style="margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; font-size: 15px; line-height: inherit; font-family: " ui="" web="" west="">
+					<a href="/userfiles/file/Year2018/LeftLinks/MiscNotices/Performa.doc" target="_blank"><span google="" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant-ligatures: no-contextual; font-variant-caps: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: ">Proforma Supply of Blank Answer Books and other exams materials</span></a></div>
+				<div helvetica="" segoe="" style="margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; font-size: 15px; line-height: inherit; font-family: " ui="" web="" west="">
+					&nbsp;</div>
+				<div helvetica="" segoe="" style="margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; font-size: 15px; line-height: inherit; font-family: " ui="" web="" west="">
+					<a href="/userfiles/file/Year2018/LeftLinks/MiscNotices/List.jpg" target="_blank"><span google="" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant-ligatures: no-contextual; font-variant-caps: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: ">List of Colleges&nbsp;</span><span google="" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant-ligatures: no-contextual; font-variant-caps: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: ">Supply of Blank Answer Books and other exams materials-I</span></a></div>
+				<div helvetica="" segoe="" style="margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; font-size: 15px; line-height: inherit; font-family: " ui="" web="" west="">
+					&nbsp;</div>
+				<div helvetica="" segoe="" style="margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; font-size: 15px; line-height: inherit; font-family: " ui="" web="" west="">
+					<a href="/userfiles/file/Year2018/LeftLinks/MiscNotices/List%202.jpg" target="_blank"><span google="" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant-ligatures: no-contextual; font-variant-caps: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: ">List of Colleges&nbsp;</span><span google="" style="margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant-ligatures: no-contextual; font-variant-caps: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: ">Supply of Blank Answer Books and other exams materials-II</span></a></div>
+			</td>
+		</tr>
+	</tdiv>
+</table>
+<p style="text-align: center">
+	<span style="font-size: 16px"><strong><u>Miscellaneous/Public Important Notices</u></strong></span></p>
+<table border="1" cellpadding="\" cellspacing="\" style="width: 509px; height: 181px">
+	<tdiv>
+		<tr>
+			<td width="80">
+				12-06-2020</td>
+			<td>
+				<a href="/userfiles/file/Year2020/LeftLinks/MiscNotices/Directions%20issued%20by%20District%20Magistrate%20dated%2030_5_2020.PDF" target="_blank"><span style="color: rgb(32, 33, 36); font-family: &quot;Google Sans&quot;, Roboto, RobotoDraft, Helvetica, Arial, sans-serif; font-variant-ligatures: no-contextual;">Directions issued by Districate Magistrate-cum-Chair</span><span style="color: rgb(32, 33, 36); font-family: &quot;Google Sans&quot;, Roboto, RobotoDraft, Helvetica, Arial, sans-serif; font-variant-ligatures: no-contextual;">person DDMA, Kurukshetra</span>&nbsp;&nbsp;</a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				27-05-2020</td>
+			<td>
+				<a href="/userfiles/file/Year2020/LeftLinks/MiscNotices/Use%20of%20Dumper.PDF" target="_blank"><span font-variant-ligatures:="" google="" style="font-size: small; color: rgb(32, 33, 36); font-family: ">Notice regarding Use of Dumper</span><span style="font-family: Arial, Helvetica, sans-serif; font-size: small;">&nbsp;</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				04-03-2020</td>
+			<td>
+				<div class="gmail_quote" style="font-family: Arial, Helvetica, sans-serif; font-size: small;">
+					<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Use%20of%20Khadi.PDF" target="_blank"><span google="" style="color: rgb(32, 33, 36); font-family: ">Use of Khadi in ceremonial dresses</span>&nbsp;&nbsp;</a></div>
+			</td>
+		</tr>
+		<tr>
+			<td width="80">
+				26-02-2020</td>
+			<td>
+				<div dir="ltr" style="font-family: Arial, Helvetica, sans-serif; font-size: small;">
+					<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Revised%20Rulses%20of%20Reservation%20of%20University%20Guest%20House%20(3).PDF" target="_blank">Notification of revised rules for reservation of University Guest Houses&nbsp;</a></div>
+			</td>
+		</tr>
+		<tr>
+			<td width="80">
+				23-01-2020</td>
+			<td>
+				<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Preservation%20of%20Records%20on%20KUK%20Website%20(2).pdf" target="_blank">Notification regarding amendments made by A.C/E.C for preservation of Records</a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				24-12-2019</td>
+			<td>
+				<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Holidays%20List-2020.PDF" target="_blank"><span style="font-family: Arial, Helvetica, sans-serif; font-size: small;">Holidays List -2020</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				15-11-2019</td>
+			<td>
+				<div dir="auto" helvetica="" segoe="" style="-webkit-font-smoothing: antialiased; margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; font-size: 15px; line-height: inherit; font-family: " ui="" web="" west="">
+					<div dir="auto" style="-webkit-font-smoothing: antialiased; margin: 0px; padding: 0px; border: 0px; font: inherit; vertical-align: baseline; color: inherit;">
+						<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Seniority%20List%20for%20House%20Allotment.PDF" target="_blank">Seniority List for House Allotment</a></div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="80">
+				18-10-2019</td>
+			<td>
+				<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/001(2).jpg" target="_blank"><span helvetica="" inline="" segoe="" style="color: rgb(32, 31, 30); font-family: " ui="" web="" west="">Notificaton Old/without Sticker Vehicles&nbsp;</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				15-10-2019</td>
+			<td>
+				<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/yogi418.jpg" target="_blank"><span helvetica="" inline="" segoe="" style="color: rgb(32, 31, 30); font-family: " ui="" web="" west="">Notification - Office bearers of the Population Education Club</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				25-09-2019</td>
+			<td>
+				<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Notification%2024_09_2019.PDF" target="_blank"><span style="font-family: Arial, Helvetica, sans-serif; font-size: small;">Regarding revision of rates of monthly wages of outsourced workmen</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				25-09-2019</td>
+			<td>
+				<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Notification%20Old%20Pension%20(1).pdf" target="_blank"><span style="font-family: Arial, Helvetica, sans-serif; font-size: small;">Notification Regarding Submission of Pension Option from Left-out Eligible Employees/Retirees</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				25-09-2019</td>
+			<td>
+				<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Notification%20Old%20Pension.pdf" target="_blank"><span style="font-size: 14px;"><span new="" style="font-family: " times="">Regarding change of option from CPF to Pension Scheme in respect of employees/retired employees</span></span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				04-10-2018</td>
+			<td>
+				<div class="gmail_quote" style="font-family: Arial, Helvetica, sans-serif; font-size: small;">
+					<a href="/userfiles/file/Year2018/LeftLinks/MiscNotices/7%20Proforma.docx" target="_blank">Proforma - Rate Contract for purchase of Chemical Galssware/ Apparatus &amp; plastic ware etc. 2018-20</a></div>
+			</td>
+		</tr>
+		<tr>
+			<td width="80">
+				04-10-2018</td>
+			<td>
+				<div class="gmail_quote" style="font-family: Arial, Helvetica, sans-serif; font-size: small;">
+					<a href="/userfiles/file/Year2018/LeftLinks/MiscNotices/6%20offers%20on%20website.docx" target="_blank">Rate Contract for purchase of Chemical Galssware/ Apparatus &amp; plastic ware etc. 2018-20</a></div>
+			</td>
+		</tr>
+		<tr>
+			<td width="80">
+				20-09-2018</td>
+			<td>
+				<a href="/userfiles/file/Year2018/LeftLinks/MiscNotices/IPR%20Policy%20Of%20KUK.pdf" target="_blank">Intellectual Property Right Policy (IPR)</a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				&nbsp;</td>
+			<td>
+				&nbsp;</td>
+		</tr>
+	</tdiv>
+</table>
+<p style="text-align: center">
+	<span style="font-size: 16px"><strong><span style="font-family: arial, sans-serif">Student Notices</span></strong></span></p>
+<table border="1" cellpadding="\" cellspacing="\" style="width: 509px">
+	<tdiv>
+		<tr>
+			<td width="80">
+				13-04-2020</td>
+			<td>
+				<a href="https://opportunitycell.com/google-free-online-courses-2020/" target="_blank"><span style="box-sizing: border-box; font-weight: 700; color: rgb(51, 51, 51); font-family: Arial, Helvetica, sans-serif; font-size: 11px;">Google free Online Courses 2020 Registration Open</span></a></td>
+		</tr>
+		<tr>
+			<td width="80">
+				09-04-2020</td>
+			<td>
+				<div class="ii gt" id=":pu" style="font-size: 0.875rem; direction: ltr; margin: 8px 0px 0px; padding: 0px; position: relative; font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;">
+					<div class="a3s aXjCH " id=":oi" style="overflow: hidden; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: small; line-height: 1.5; font-family: Arial, Helvetica, sans-serif;">
+						<div dir="auto">
+							<div dir="auto">
+								<a href="/userfiles/file/Year2020/LeftLinks/MiscNotices/IMG-20200409-WA0023(1).jpg" target="_blank">Revised Panel of Counsellors with schedule</a></div>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="80">
+				13-11-2019</td>
+			<td>
+				<div dir="auto" helvetica="" segoe="" style="-webkit-font-smoothing: antialiased; margin: 0px; padding: 0px; border: 0px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; font-size: 15px; line-height: inherit; font-family: " ui="" web="" west="">
+					<div dir="auto" style="-webkit-font-smoothing: antialiased; margin: 0px; padding: 0px; border: 0px; font: inherit; vertical-align: baseline; color: inherit;">
+						<a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/NOTIFICATION%20jersiesjackets%20distributed.PDF" target="_blank">Regarding jersies/jackets distribution to SC candidates&nbsp;</a></div>
+					<div dir="auto" style="-webkit-font-smoothing: antialiased; margin: 0px; padding: 0px; border: 0px; font: inherit; vertical-align: baseline; color: inherit;">
+						&nbsp;</div>
+					<div dir="auto" style="-webkit-font-smoothing: antialiased; margin: 0px; padding: 0px; border: 0px; font: inherit; vertical-align: baseline; color: inherit;">
+						Jacket/Jersy <a href="/userfiles/file/Year2019/LeftLinks/MiscNotices/Jacket%20Form.PDF" target="_blank">Application Form</a></div>
+					<div dir="auto" style="-webkit-font-smoothing: antialiased; margin: 0px; padding: 0px; border: 0px; font: inherit; vertical-align: baseline; color: inherit;">
+						&nbsp;</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td width="80">
+				&nbsp;</td>
+			<td>
+				&nbsp;</td>
+		</tr>
+		<tr>
+			<td width="80">
+				&nbsp;</td>
+			<td>
+				&nbsp;</td>
+		</tr>
+	</tdiv>
+</table>
+        	</div>
+			</div>
+	      
+	
+	    <!--VC Blog-->
+	  <div style="clear:both; height:1px; display:block"></div>
+	 
+	 
+	<!--footer Starts here-->
+	 <div id="footer">
+<div class="footerBrdr">
+	<div style="border:0px solid red; padding-top:20px;" align="center">
+                <a href="information.php?m=dg==&L01_id=MQ==&L01_direction="  title="About Us" class="footerlink">About Us</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=Mw==&L01_direction=H"  title="Administration" class="footerlink">Administration</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=OA==&L01_direction=H"  title="Faculties/Departments" class="footerlink">Faculties</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=MTM=&L01_direction=V"  title="About the ACT and PIOs & First Appellate" class="footerlink">RTI</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=NjE=&L01_direction=H"  title="Library" class="footerlink">Library</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=MTE=&L01_direction=H"  title="Facilities provided by the university" class="footerlink">Facilities</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=MTQ=&L01_direction=V"  title="Syllabus" class="footerlink">Syllabi</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=MTU=&L01_direction=V"  title="Ordinance" class="footerlink">Ordinances</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=NjU=&L01_direction=V"  title="Online Payment" class="footerlink">Online Payment</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=Njk=&L01_direction=V"  title="Hostel Payment" class="footerlink">Hostel Payment</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=NjQ=&L01_direction=V"  title="Admissions" class="footerlink">Admissions</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=Njc=&L01_direction=V"  title="Exam Reval Forms" class="footerlink">Online Exam/Re-Evaluation</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=MTk=&L01_direction="  title="Important Links" class="footerlink">Important Links</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=Njg=&L01_direction=V"  title="In Students" class="footerlink">International Students</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                        <a href="information.php?m=dg==&L01_id=NzA=&L01_direction=V"  title="Journal" class="footerlink">KU Law Journal</a>&nbsp;<span style="color:#194287">|</span>&nbsp;
+                </div>
+</div>
+    
+<div class="copyrightCare">Although sufficient and continous efforts are being made to keep the information on this website up-to-date, however, it should in no way be quoted as an authentic source of information. In case any dispute or conflict, the printed and signed notices of the University will prevail.</div>
+
+<div class="copyrighttxt">Copyright © 2010  Kurukshetra University, Kurukshetra, India. All rights reserved.<!--<br/>Website designed & maintained by <a href="http://www.shalimarinfonet.com/" class="copyrighttxt" target="_blank">Shalimar Infonet (P) Ltd., Chandigarh</a>-->
+	<br />Best viewed in IE 7 & 8, Mozila V3 and Google ChromeV4 or above, resolution 1024 x 768px
+</div>
+
+<div style="clear:both; height:8px;"></div>
+<!--<div align="center" style="padding:5px;"></div>
+<div align="center" style="padding:5px; margin-bottom:15px;"></div>-->
+</div>
+	<!--Footer Ends here-->
+<script language="javascript">
+onBodyLoad();
+startFlash();
+</script>
+  </div>
+</div>
+</body>
+</html>

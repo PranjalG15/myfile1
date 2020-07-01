@@ -12,7 +12,7 @@ function cb(err, response, html) {
     if (err == null && response.statusCode == 200) {
         fs.writeFileSync("notice.html", html);
         console.log("File Saved");
-       // parseHtml(html);
+        parseHtml(html);
     } else if (response.statusCode == 404) {
         console.log("Page not found");
     } else {

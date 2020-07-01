@@ -1,0 +1,17 @@
+{
+  "name": "day13electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "C:/Users/hp/Desktop/dev/day13electron/activity/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ejs-electron": "^2.0.3",
+    "electron": "^9.0.5"
+  }
+}
