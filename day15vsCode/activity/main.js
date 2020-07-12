@@ -7,13 +7,7 @@
 // to run => npm start
 const electron = require("electron");
 const app = electron.app;
-const ejs = require("ejs-electron");
-ejs.data({
-  "title": "My Excel",
-  "Heading": "My First Excel APP",
-  "rows": 100,
-  "cols": 26
-})
+
 
 function createWindow() {
   let win = new electron.BrowserWindow({
@@ -23,7 +17,7 @@ function createWindow() {
       nodeIntegration: true
     }
   })
-  win.loadFile("index.ejs").then(function () {
+  win.loadFile("index.html").then(function () {
     // console.log("Window opened successfully");
     win.maximize();
     win.webContents.openDevTools();
@@ -49,4 +43,4 @@ app.on('activate', () => {
 })
   // In this file you can include the rest of your app's specific main process
   // code. You can also put them in separate files and require them here.
-  // code. You can also put them in separate files and require them here.
+ 

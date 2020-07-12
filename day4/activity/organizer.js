@@ -21,7 +21,7 @@ function sendFile(dest,category,src)
     }
     let fName=path.basename(src);
     let cPath=path.join(categoryPath,fName);
-    fsy.copFileSync(src,cPath);
+    fs.copyFileSync(src,cPath);
 }
 function getCategory(ext) {
     let types=utility.types;

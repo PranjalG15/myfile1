@@ -1,37 +1,168 @@
 // 
 const $ = require("jquery");
+const fs = require("fs");
 // document 
+const dialog = require("electron").remote.dialog;
 $(document).ready(function () {
     // console.log("Jquery Loaded");
     let db;
     let lsc;
+    $(".content-container").on("scroll", function () {
+        let scrollY = $(this).scrollTop();
+        let scrollX = $(this).scrollLeft();
+        // console.log(scrollY);
+        $("#top-row,#top-left-cell").css("top", scrollY + "px");
+        $("#top-left-cell,#left-col").css("left", scrollX + "px");
+    })
+    $("#grid .cell").on("keyup", function () {
+        let { rowId } = getrc(this);
+        let ht = $(this).height();
+        $($("#left-col .cell")[rowId]).height(ht);
+
+    })
+    $(".menu").on("click", function () {
+        let Id = $(this).attr("id");
+        // File
+        $(".menu-options").removeClass("selected");
+        $(`#${Id}-menu-options`).addClass("selected");
+    })
+    let lcell;
     $("#grid .cell").on("click", function () {
         let { colId, rowId } = getrc(this);
         let value = String.fromCharCode(65 + colId)
             + (rowId + 1);
+        let cellObject = db[rowId][colId];
         $("#address-input").val(value);
+        $("#formula-input").val(cellObject.formula);
+        //    set cell formula 
+        if (lcell && this != lcell) {
+            $(lcell).removeClass("selected");
+        }           
+          $(this).addClass("selected");    
+        if (cellObject.bold) {
+            $("#bold").addClass("isOn")
+        } else {
+            $("#bold").removeClass("isOn")
+        }
+        lcell = this;
     })
+    $("#bold").on("click", function () {
+        $(this).toggleClass("isOn");
+        let isBold = $(this).hasClass("isOn");
+        $("#grid .cell.selected").css("font-weight", isBold ? "bolder" : "normal");
+        let cellElem = $("#grid .cell.selected");
+        let cellObject = getcell(cellElem);
+        cellObject.bold = isBold;
+    })
+
+    $("#font-family").on("change", function () {
+        let fontFamily = $(this).val();
+        $("#grid .cell.selected").css("font-family", fontFamily);
+        let cellElem = $("#grid .cell.selected");
+        let cellObject = getcell(cellElem);
+        cellObject.fontFamily = fontFamily
+    })
+
+    $("#bg-color").on("change", function () {
+        let bgColor = $(this).val();
+        let cellElem = $("#grid .cell.selected");
+        cellElem.css("background-color", bgColor);
+        let cellObject = getcell(cellElem);
+        cellObject.bgColor = bgColor
+    })
+    $("#New").on("click", function () {
+        db = [];
+        let AllRows = $("#grid").find(".row");
+        for (let i = 0; i < AllRows.length; i++) {
+            let row = [];
+            let AllCols = $(AllRows[i]).find(".cell");
+            for (let j = 0; j < AllCols.length; j++) {
+                //    DB
+                let cell = {
+                    value: "",
+                    formula: "",
+                    downstream: [],
+                    upstream: [],
+                    bold: false,
+                    underline: false,
+                    italic: false,
+                    fontFamily: "Arial",
+                    fontSize: 12,
+                    bgColor: "white",
+                    textColor: "black",
+                    halign: "left"
+                }
+
+                $(AllCols[j]).html('');
+                $(AllCols[j]).css("font-weight", cell.bold ? "bolder" : "normal");
+                $(AllCols[j]).css("font-style", cell.italic ? "italic" : "normal");
+                $(AllCols[j]).css("text-decoration", cell.underline ? "underline" : "none");
+                $(AllCols[j]).css("font-family", cell.fontFamily);
+                $(AllCols[j]).css("font-size", cell.fontSize);
+                $(AllCols[j]).css("color", cell.textColor);
+                $(AllCols[j]).css("background-color", cell.bgColor);
+                $(AllCols[j]).css("text-align", cell.halign);
+
+                row.push(cell);
+            }
+            db.push(row);
+        }
+        console.log(db);
+        // $("#grid .cell").eq(0).trigger("click");
+        let cellArr = $("#grid .cell");
+        $(cellArr[0]).trigger("click");
+    })
+
+    $("#Save").on("click", async function () {
+        let sdb = await dialog.showOpenDialog();
+        let fp = sdb.filePaths[0];
+        if (fp == undefined) {
+            console.log("Please select file first");
+            return;
+        }
+        let jsonData = JSON.stringify(db);
+        fs.writeFileSync(fp, jsonData);
+        // open dialogBox
+        // select file
+        // write 
+        // Input=> file
+    })
+    $("#Open").on("click", async function () {
+        let sdb = await dialog.showOpenDialog();
+        let fp = sdb.filePaths[0];
+        if (fp == undefined) {
+            console.log("Please select file first");
+            return;
+        }
+        let buffer = fs.readFileSync(fp);
+        db = JSON.parse(buffer);
+        let AllRows = $("#grid").find(".row");
+        for (let i = 0; i < AllRows.length; i++) {
+            let AllCols = $(AllRows[i]).find(".cell");
+            for (let j = 0; j < AllCols.length; j++) {
+                //    DB
+                $(`#grid .cell[r-id=${i}][c-id=${j}]`).html(db[i][j].value);
+            }
+        }
+    })
+    // **************Formula stuff starts here******************
     // val=> val
     // formula=> val
     $("#grid .cell").on("blur", function () {
         let { colId, rowId } = getrc(this);
         let cellObject = getcell(this);
-        
+        //if yo randomly click on any cell 
+        lsc = this;
         if (cellObject.value == $(this).html()) {
-            lsc=this;
-            return
+            return;
         }
-
         if (cellObject.formula) {
             rmusnds(cellObject, this);
         }
-
         cellObject.value = $(this).text();
         updateCell(rowId, colId, cellObject.value);
         // console.log(db);
-        lsc = this;
     })
-    
     // val=> formula convert
     //formula => new formula 
     $("#formula-input").on("blur", function () {
@@ -40,7 +171,6 @@ $(document).ready(function () {
             return
         }
         let { colId, rowId } = getrc(lsc);
-
         if (cellObj.formula) {
             // delete Formula
             rmusnds(cellObj, lsc);
@@ -55,11 +185,11 @@ $(document).ready(function () {
         updateCell(rowId, colId, nVal);
         //
     })
+    //     upstream => go to your upstream=> get there values
+    // (   A1 +  A1 - A11 )= [ (,A11,+,A11,+,A1,)]=> [(,10,+,A11,+,10,)]=> ( 10 + A11 + 10 )
+    // ( 10 + 20 )
+    // Js => eval 
     function evaluate(cellObj) {
-        //     upstream => go to your upstream=> get there values
-        // ( A1 + A11 + A1 )= [ (,A1,+,A11,+,A1,)]=> [(,10,+,A11,+,10,)]=> ( 10 + A11 + 10 )
-        // ( 10 + 20 )
-        // Js => eval 
         let formula = cellObj.formula;
         console.log(formula);
         for (let i = 0; i < cellObj.upstream.length; i++) {
@@ -68,6 +198,8 @@ $(document).ready(function () {
             let colAddress = String.fromCharCode(cuso.colId + 65);
             let cellAddress = colAddress + (cuso.rowId + 1);
             let fusokiVal = db[cuso.rowId][cuso.colId].value;
+            //  remove formula 
+            // return 
             let formulCompArr = formula.split(" ");
             formulCompArr = formulCompArr.map(function (elem) {
                 if (elem == cellAddress) {
@@ -78,12 +210,25 @@ $(document).ready(function () {
             })
             formula = formulCompArr.join(" ");
         }
-
         console.log(formula);
         // infix evaluation
         return eval(formula);
     }
     // set yourself to parents downstream set parent to your upstream
+    function updateCell(rowId, colId, nVal) {
+        let cellObject = db[rowId][colId];
+        cellObject.value = nVal;
+        // update ui 
+        $(`#grid .cell[r-id=${rowId}][c-id=${colId}]`).html(nVal);
+
+        for (let i = 0; i < cellObject.downstream.length; i++) {
+            let dsocordObj = cellObject.downstream[i];
+            let dso = db[dsocordObj.rowId][dsocordObj.colId];
+            let dsonVal = evaluate(dso);
+            updateCell(dsocordObj.rowId, dsocordObj.colId, dsonVal);
+        }
+
+    }
     function setusnds(cellElement, formula) {
         // (A1 + B1)
         formula = formula.replace("(", "").replace(")", "");
@@ -121,8 +266,10 @@ $(document).ready(function () {
             let uso = cellObject.upstream[i];
             let fuso = db[uso.rowId][uso.colId];
             // find index splice yourself
+            // 02
+            // 00,01,02
             let fArr = fuso.downstream.filter(function (dCell) {
-                return dCell.colId != colId && dCell.rowId != rowId;
+                return !(dCell.colId == colId && dCell.rowId == rowId);
             })
             fuso.downstream = fArr;
             // let fArr = []
@@ -131,25 +278,8 @@ $(document).ready(function () {
             //         fArr.push(fuso.downstream[i]);
             //     }
             // }
-
         }
         cellObject.upstream = [];
-
-    }
-    function updateCell(rowId, colId, nVal) {
-        let cellObject = db[rowId][colId];
-        cellObject.value = nVal;
-        // update ui 
-
-
-        $(`#grid .cell[r-id=${rowId}][c-id=${colId}]`).html(nVal);
-
-        for (let i = 0; i < cellObject.downstream.length; i++) {
-            let dsocordObj = cellObject.downstream[i];
-            let dso = db[dsocordObj.rowId][dsocordObj.colId];
-            let dsonVal = evaluate(dso);
-            updateCell(dsocordObj.rowId, dsocordObj.colId, dsonVal);
-        }
 
     }
     // [4,0]=>"40"
@@ -173,29 +303,34 @@ $(document).ready(function () {
     // Get cell from db
     function getcell(cellElem) {
         let { colId, rowId } = getrc(cellElem);
+        console.log(colId + " " + rowId);
         return db[rowId][colId];
     }
-    function init() {
-        db = [];
-        let AllRows = $("#grid").find(".row");
-        for (let i = 0; i < AllRows.length; i++) {
-            let row = [];
-            let AllCols = $(AllRows[i]).find(".cell");
-            for (let j = 0; j < AllCols.length; j++) {
-                //    DB
-                let cell = {
-                    value: "",
-                    formula: "",
-                    downstream: [],
-                    upstream: []
 
-                }
-                // $(AllCols[j]).html('');
-                row.push(cell);
-            }
-            db.push(row);
-        }
-        console.log(db);
+
+    function init() {
+        $("#File").trigger("click");
+        $("#New").trigger("click");
+        // db = [];
+        // let AllRows = $("#grid").find(".row");
+        // for (let i = 0; i < AllRows.length; i++) {
+        //     let row = [];
+        //     let AllCols = $(AllRows[i]).find(".cell");
+        //     for (let j = 0; j < AllCols.length; j++) {
+        //         //    DB
+        //         let cell = {
+        //             value: "",
+        //             formula: "",
+        //             downstream: [],
+        //             upstream: []
+
+        //         }
+        //         $(AllCols[j]).html('');
+        //         row.push(cell);
+        //     }
+        //     db.push(row);
+        // }
+        // console.log(db);
     }
     init();
 })
