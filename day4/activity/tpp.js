@@ -13,7 +13,7 @@ switch(cmd) {     //we are having mainly 4 commands so they are given in switch 
         viewFile.view(process.argv[3],process.argv[4]); //file in which command file is imported+command+src+dest
         break;  //end of switch case
     case "treefy": //case 2:treefy
-    treefyFile.treefy(process.argv[3],process.argv[4]);
+       treefyFile.treefy(process.argv[3],process.argv[4]);
         break; //end of switch case
     case "untreefy": //case 3:untreefy
         untreefyFile.untreefyFn(process.argv[3],process.argv[4]); //file in which command file is imported+command+src+dest
